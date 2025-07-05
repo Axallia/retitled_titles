@@ -17,11 +17,7 @@ It relies on the titles first increasing in alpha as they fade-in, and then decr
   it will create a seamless transition between two._
 
 
-<br>
-<video controls>
-<source src="showcase/pixel_appearing_showcase.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+![showcase/pixel_appearing_showcase](showcase/pixel_appearing_showcase.mp4)
 
 
 ## How to use this tool
@@ -97,11 +93,7 @@ The font is `retitled_titles:fancy` because yes, and text is `"\u0001 retitled t
 Putting it all together we have the thing from the logo:  
 `title @a title {"text": "\u0001 retitled titles.  \u0002", "color": "#258800", "font": "retitled_titles:fancy", "shadow_color": 4280649738}`, Which in-game looks like this:
 
-<br>
-<video controls>
-<source src="showcase/logo.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+![showcase/logo](showcase/logo.mp4)
 
 #### Commands to try in-game:
 
