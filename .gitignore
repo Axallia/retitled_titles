@@ -1,3 +1,7 @@
 *.backup0
+*.backup1
+*.backup2
 *.kra
 *.kra~
+*.png~
+*.strip

@@ -1,5 +1,6 @@
-#version 150
+#version 330
 
+#moj_import <minecraft:fog.glsl>
 #moj_import <retitled_titles:utils.glsl>
 
 in vec3 Position;
@@ -11,76 +12,87 @@ uniform sampler2D Sampler2;
 
 uniform mat4 ModelViewMat;
 uniform mat4 ProjMat;
+uniform int FogShape;
 uniform float GameTime;
+uniform vec2 ScreenSize;
 
 out float vertexDistance;
 out vec4 vertexColor;
 out vec2 texCoord0;
-out vec2 window_position;
 
-// NOTE: it's best to make it so at the factor of 1.0, function results in 0.0
-// and make the rest of the text offset using font's accent
-// (tho exception can be made if you are pissed that fonts can't have accent bigger than hight, that's annoying lol)
-float displacement_generic(float factor) {
-    float two_factors = factor * 2.0;
-    return 0.125 * (3.0 * factor - 0.5 * two_factors * two_factors - 1.0);
-}
+flat out int obj_type;
 
-float displacement_slide_from_up(float factor) {
-    return (factor * factor) - (2.0 * factor) + 1.0;
-}
-
-float displacement_slide_from_down(float factor) {
-    return -(factor * factor) + (2.0 * factor) - 1.0;
-}
-
+#moj_import <retitled_titles:transition_functions.glsl>
 
 void main() {
 
-    if ( approx_match(Color.rg, vec2(0.03529411764705882, 0.24313725490196078), 0.01) ) {
-        gl_Position = vec4(0.0);
-        return;
-    }
-
-    if ( approx_match(Color.rg, vec2(0.1450980392156863, 1.0), 0.1) ) {
+    bool is_monochromatic = ((Color.r - Color.g) == 0.0) && ((Color.b - Color.g) == 0.0);
+    if ( approx_match(Color.g, 135.0 / 255.0, 0.02) && !is_monochromatic ) {
         vertexColor = Color;
         texCoord0 = UV0;
         vertexDistance = 0.0;
+        float guiScale = (round(ScreenSize.x * ProjMat[0][0] / 2));
+        float scaled_gui_scale = guiScale*0.3333;
 
         gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+
+        //obj_type = 0;
+        //vertexColor = vec4(
+        //    guiScale*255.0, 
+        //    ((1.0 > -guiScale) && (-guiScale >= 4.0)) ? 1.0 : 0.0,
+        //    guiScale == 0.0 ? 1.0 : 0.0,
+        //    1.0
+        //);
+        //return;
+
+
+        float adjustment_type = (Color.g * 255.0 - 134.0);
+        if (adjustment_type < 1.0) {
+            switch (int(adjustment_type)){
+                // actionbar
+                case 0:
+                gl_Position.xy *= 0.25;
+                gl_Position.y += -1.0 + 123.5/ScreenSize.y*guiScale;
+                break;
+
+                // top
+                case -1:
+                gl_Position.xy *= 0.5;
+                gl_Position.y += 1.0 - 100.0/ScreenSize.y*guiScale;
+                break;
+
+                // top right-ish
+                case -2:
+                gl_Position.xy *= 0.25;
+                gl_Position.y += 1.0 - 100.0/ScreenSize.y*guiScale;
+                gl_Position.x += 1.0 - 100.0/ScreenSize.x*guiScale;
+                break;
+            }
+        } else {
+            float text_scale = 1.0 / adjustment_type;
+            gl_Position.xy *= text_scale;
+        }
+        
+        
         int effect_ID = int(Color.r * 255.0);
-        // yes ik it's messy but we didn't got function pointers in glsl cus gpus are kinda stupod so yeah
+        // yes I know, it's kinda messy but we didn't got function pointers in glsl cus gpus are kinda stupod so yeah
         switch (effect_ID) {
-        case 37:
-            gl_Position.y += displacement_generic(Color.a);
-            break;
-        case 38:
-            gl_Position.y += displacement_slide_from_up(Color.a);
-            break;
-        case 39:
-            gl_Position.x += rand(GameTime) * 0.015625;
-            gl_Position.y += rand(GameTime + 2.535457) * 0.015625;
-            break;
-        case 40:
-            gl_Position.y += displacement_slide_from_up(Color.a) + rand(GameTime + 2.535457) * 0.015625;
-            gl_Position.x += rand(GameTime) * 0.015625;
-            break;
-        case 41:
-            gl_Position.y += displacement_slide_from_down(Color.a);
-            break;
+#moj_import <retitled_titles:configured_transitions.glsl>
         }
 
-        window_position = gl_Position.xy;
+        obj_type = 16; // title text
         return;
     }
 
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
-    // comment this part if you want to disable all text having little pop animation
+
+    // comment out this part if you want to disable all text having little pop animation
     // or replace the function with whatever your heart desires, to change the default transition
     gl_Position.y += displacement_generic(Color.a);
 
 
-    vertexDistance = length((ModelViewMat * vec4(Position, 1.0)).xyz);
+    vertexDistance = fog_distance(Position, FogShape);
     vertexColor = Color * texelFetch(Sampler2, UV2 / 16, 0);
     texCoord0 = UV0;
+    obj_type = 0;  // regular text
 }

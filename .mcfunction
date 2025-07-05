@@ -34,3 +34,20 @@ title @a title {"text":"\uF902\u0007cute\u0008", "font":"retitled_titles:regular
 
 # default transition (pop from down), untitled decoration, base gradient of index 8 (AKA purple-red-yellow)
 title @a title {"text":"\uF903\u0009RETITLED TITLES\u000A", "font":"retitled_titles:regular", "color":"#25FF08"}
+
+title @p title {"text": "\u0003 smooth  \u0004", "color": "#2F8803", "font": "retitled_titles:fancy", "shadow_color": 4281305116}
+title @a title [\
+    {"text": "\u0003", "color": "#2B8803", "font": "retitled_titles:fancy", "shadow_color": 0}, \
+    {"text": "w", "color": "#268804"}, \
+    {"text": "h", "color": "#298804"}, \
+    {"text": "a", "color": "#268804"}, \
+    {"text": "t", "color": "#298804"}, \
+    {"text": "e", "color": "#268804"}, \
+    {"text": "v", "color": "#298804"}, \
+    {"text": "e", "color": "#268804"}, \
+    {"text": "r", "color": "#298804"}, \
+    {"text": " \u0004", "color": "#2C8803", "font": "retitled_titles:fancy", "shadow_color": 0} \
+]
+
+# 2C8601
+# FF2C8606

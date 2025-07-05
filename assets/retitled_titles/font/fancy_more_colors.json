@@ -3,78 +3,86 @@
 		{
 			"type": "bitmap",
 			"file": "retitled_titles:decor.0.png",
-			"ascent": 12,
-			"height": 16,
+			"ascent": 24,
+			"height": 32,
 			"chars": ["\u0001\u0002"]
 		},
 		{
 			"type": "bitmap",
 			"file": "retitled_titles:decor.1.png",
-			"ascent": 12,
-			"height": 16,
+			"ascent": 24,
+			"height": 32,
 			"chars": ["\u0003\u0004"]
 		},
 		{
 			"type": "bitmap",
 			"file": "retitled_titles:decor.2.png",
-			"ascent": 12,
-			"height": 16,
+			"ascent": 24,
+			"height": 32,
 			"chars": ["\u0005\u0006"]
 		},
 		{
 			"type": "bitmap",
 			"file": "retitled_titles:decor.3.png",
-			"ascent": 12,
-			"height": 16,
+			"ascent": 24,
+			"height": 32,
 			"chars": ["\u0007\u0008"]
 		},
 		{
 			"type": "bitmap",
 			"file": "retitled_titles:decor.4.png",
-			"ascent": 12,
-			"height": 16,
+			"ascent": 24,
+			"height": 32,
 			"chars": ["\u0009\u000A"]
 		},
-		
 		{
 			"type": "bitmap",
-			"file": "retitled_titles:latin_alphabet.png",
-			"ascent": 8,
-			"height": 8,
+			"file": "retitled_titles:decor.5.4_color_gradient.png",
+			"ascent": 24,
+			"height": 32,
+			"chars": ["\u000B\u000C"]
+		},
+		
+
+		{
+			"type": "bitmap",
+			"file": "retitled_titles:fancy/latin_alphabet.4_color_gradient.png",
+			"ascent": 16,
+			"height": 16,
 			"chars": ["abcdefghijklmnopqrstuvwxyz"]
 		},
 		{
 			"type": "bitmap",
-			"file": "retitled_titles:arabic_numbers.png",
-			"ascent": 8,
-			"height": 8,
+			"file": "retitled_titles:fancy/arabic_numbers.4_color_gradient.png",
+			"ascent": 16,
+			"height": 16,
 			"chars": ["0123456789"]
 		},
 		{
 			"type": "space",
 			"advances": {
-				" ": 4
+				" ": 8
 			}
 		},
 		{
 			"type": "bitmap",
-			"file": "retitled_titles:generic_marks.png",
-			"ascent": 6.5,
-			"height": 8,
+			"file": "retitled_titles:fancy/generic_marks.png",
+			"ascent": 13,
+			"height": 16,
 			"chars": [".,-:;()[]{}"]
 		},
 		{
 			"type": "bitmap",
-			"file": "retitled_titles:tone_marks.png",
-			"ascent": 12,
-			"height": 16,
+			"file": "retitled_titles:fancy/tone_marks.png",
+			"ascent": 24,
+			"height": 32,
 			"chars": ["!?"]
 		},
 		{
 			"type": "bitmap",
-			"file": "retitled_titles:latin_alphabet_double_gradient.png",
-			"ascent": 8,
-			"height": 8,
+			"file": "retitled_titles:fancy/latin_alphabet.3_color_gradient.png",
+			"ascent": 16,
+			"height": 16,
 			"chars": ["ABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 		},
 		
